@@ -31,6 +31,10 @@ This is a work in progress and is just some pesonal notes for now.
     * create a python venv: `python -m venv venv`
     * `pip install -r requirements.txt`
     * I may have done some other things to get nvidia cuda working, I don't remember. I may have installed torch-gpu using pip?
+* [Smart Rename](https://github.com/chrdavis/SmartRename) for renaming large batches of files using regex and regex groups.
+    * If you're new to regex, just learn about `^`, `$`, `.`, `*`, `+`, `\d` and `()`.
+    * ie: `sequence(\d+).png` as the search string and `$1.png` as the output will turn `sequence0001.png` to `0001.png`.
+    * handy for the picky input of GMFSS Fortuna
 
 ## Post process
 
@@ -40,9 +44,14 @@ I post process on the CLI with real-esrgan and GMFSS Fortuna instead of using no
 2. Upscale frames with [Real-Esrgan](https://github.com/xinntao/Real-ESRGAN) to 2x (4x is too big for GMFSS Fortuna).
     1. `realesrgan -i input\ -o output\ -n realesrgan-x4plus -s 2`
     2. Sip a coffee while listening to the coils in my PC make strange buzzing sounds.
+    3. Rename output to be just numbers using Smart Rename
 3. Interpolate frames to 60fps with GMFSS Fortuna
     1. Move scaled frames directory to git folder of GMFSS Fortuna
-    2. All files must be named "####".png. If there are any letters in the filenames then it will fail.
+    2. All files must be named "####".png. If there are any letters in the filenames, before the extension, then it will fail.
     3. `venv\Scripts\activate`
     4. `python inference_video.py --img=input\ --scale=1.0 --multi=2 --union`
     5. Sip a coffee while listening to the sound of my GPU fans.
+
+## Copyright
+
+Copyright (c) Sean Esopenko 2023
