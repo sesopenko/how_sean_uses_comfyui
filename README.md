@@ -30,10 +30,11 @@ This is a work in progress and is just some pesonal notes for now.
     * If you're new to regex, just learn about `^`, `$`, `.`, `*`, `+`, `\d` and `()`.
     * ie: `sequence(\d+).png` as the search string and `$1.png` as the output will turn `sequence0001.png` to `0001.png`.
     * handy for the picky input of GMFSS Fortuna
+* [Calculate Aspect Ratio](https://calculateaspectratio.com/): tool for calculating aspect ratios. Handy for working with the awkward sizes of SD latents.
 
 ## Post process
 
-I post process using [upscale_interpolate.json](comfyui_workflows/post_processing/upscale_interpolate.json).
+I post process using [upscale_interpolate.json](comfyui_workflows/post_processing/upscale_interpolate.json). Intall missing nodes using ComfyUI Node Manager.
 
 Get [4x_foolhardy_Remacri](https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/tree/main) for it to work.
 
