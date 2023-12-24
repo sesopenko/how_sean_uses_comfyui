@@ -21,7 +21,9 @@ This is a work in progress and is just some pesonal notes for now.
     * Convert audio files to wav for use in Premiere: `ffmpeg -i input_audio.m4a output.wav`
     * Extract animation frames. Remember to include `-vf "fps=30"` (or whatever your framerate is) so that variable frame rate videos have consistent frame rates.
         `ffmpeg -i input_video.mp4 -vf "fps=30" output/%04d.png`
-    * Can be used to 
+    * If saving as jpeg (ie: bringing a 4k web download into premiere's picky import system for pre-processing), then use `qsquale:v`.
+      * 2-5 is good quality
+      * ie: `ffmpeg -i input.mp4 -qscale:v 2 -vf "fps=30" frames\%05d.jpg`
 * [mkvtoolsnix](https://mkvtoolnix.download/) for merging video and audio files together when required.
 * [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN)
   * I rename it to a shorter executable (`realesrgan.exe`) then add the folder to my windows PATH so that I can use it anywhere from the command prompt. Make sure output directory is created before hand.
