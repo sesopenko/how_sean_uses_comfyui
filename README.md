@@ -32,10 +32,10 @@ This is a work in progress and is just some pesonal notes for now.
 * [GMFSS_Fortuna](https://github.com/98mxr/GMFSS_Fortuna)
   * create a python venv: `python -m venv venv`
   * `pip install -r requirements.txt`
-  * Use the `--fp16` flag on nvidia cards with tensor cores to run in 16 bit mode and perform floating point math at almost 2x the speed.
   * I may have done some other things to get nvidia cuda working, I don't remember. I may have installed torch-gpu using pip?
 * [ImageMagick](https://imagemagick.org/script/download.php#windows) for batch downsizing.
   * Can use a trilinear filter for downsizing huge images to reasonable sizes for online sharing (ie: x4 upscale down to 1080p)
+  * use `-alpha off` for files compatible with GMFSS Fortuna
 * [Adobe Premiere](https://www.adobe.com/ca/products/premiere.html). I used Sony Vegas for a little while but it's garbage compared to premiere. Take advantage of student/educator pricing if you can, you save a lot of money!
 * [python 3.10](https://www.python.org/downloads/) (some tooling doesn't yet work with 3.11 and later)
 * [ImageMagick](https://imagemagick.org/script/download.php#windows) for image resizing with good filters.
@@ -57,12 +57,12 @@ I post process on the CLI with real-esrgan and GMFSS Fortuna instead of using no
 4. Downscale with imagemagick (triangle/bilinear filter):
    1. calculate desired aspect ratio of scaled images
    2. open terminal in directory with 4x sized images
-   2. `magick mogrify -path output -resize 1033x1920 -filter Triangle *.png`
+   2. `magick mogrify -path output -resize 1033x1920 -filter Triangle -alpha off *.png`
 3. Interpolate frames to 60fps with GMFSS Fortuna
   1. Move downscaled frames directory to git folder of GMFSS Fortuna
   2. All files must be named "####".png. If there are any letters in the filenames, before the extension, then it will fail.
   3. `venv\Scripts\activate`
-  4. `python inference_video.py --fp16 --img=input\ --scale=1.0 --multi=2 --union`
+  4. `python inference_video.py --img=input\ --scale=1.0 --multi=2 --union`
   5. Sip a coffee while listening to the sound of my GPU fans.
 
 ## Post process Using Workflow (slow saving pngs!)
