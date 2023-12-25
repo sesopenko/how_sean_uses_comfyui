@@ -2,7 +2,7 @@
 
 This is a work in progress and is just some pesonal notes for now.
 
-## Tooling
+## Notes on tooling
 
 * [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
 * [ComfyUI Node Manager](https://github.com/ltdrdata/ComfyUI-Manager) to install custom nodes missing from my system.
@@ -32,8 +32,10 @@ This is a work in progress and is just some pesonal notes for now.
 * [GMFSS_Fortuna](https://github.com/98mxr/GMFSS_Fortuna)
   * create a python venv: `python -m venv venv`
   * `pip install -r requirements.txt`
+  * Use the `--fp16` flag on nvidia cards with tensor cores to run in 16 bit mode and perform floating point math at almost 2x the speed.
   * I may have done some other things to get nvidia cuda working, I don't remember. I may have installed torch-gpu using pip?
 * [ImageMagick](https://imagemagick.org/script/download.php#windows) for batch downsizing.
+  * Can use a trilinear filter for downsizing huge images to reasonable sizes for online sharing (ie: x4 upscale down to 1080p)
 * [Adobe Premiere](https://www.adobe.com/ca/products/premiere.html). I used Sony Vegas for a little while but it's garbage compared to premiere. Take advantage of student/educator pricing if you can, you save a lot of money!
 * [python 3.10](https://www.python.org/downloads/) (some tooling doesn't yet work with 3.11 and later)
 * [ImageMagick](https://imagemagick.org/script/download.php#windows) for image resizing with good filters.
@@ -43,7 +45,7 @@ This is a work in progress and is just some pesonal notes for now.
     * handy for the picky input of GMFSS Fortuna
 * [Calculate Aspect Ratio](https://calculateaspectratio.com/): tool for calculating aspect ratios. Handy for working with the awkward sizes of SD latents.
 
-## Post process on command line (finicky but faster)
+## Post process on command line (finicky but faster than ComfyUI)
 
 I post process on the CLI with real-esrgan and GMFSS Fortuna instead of using nodes in ComfyUI because ComfyUI takes absolutely forever to save PNGs for each of these steps. It also makes the workflow less risky in case there's a failure after it's sampled the frames.
 
@@ -60,7 +62,7 @@ I post process on the CLI with real-esrgan and GMFSS Fortuna instead of using no
   1. Move downscaled frames directory to git folder of GMFSS Fortuna
   2. All files must be named "####".png. If there are any letters in the filenames, before the extension, then it will fail.
   3. `venv\Scripts\activate`
-  4. `python inference_video.py --img=input\ --scale=1.0 --multi=2 --union`
+  4. `python inference_video.py --fp16 --img=input\ --scale=1.0 --multi=2 --union`
   5. Sip a coffee while listening to the sound of my GPU fans.
 
 ## Post process Using Workflow (slow saving pngs!)
